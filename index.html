@@ -1,107 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>MASS-MAIL DISPATCHER</title>
-    <link rel="stylesheet" href="style.css" />
-    <link  rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"/>
-  </head>
-
-
-  <section>
-    <nav>
-      <ul>
-      </li>
-          <a href=""><h1>Exposys Data Lab</h1></a>
-        </li>
-      </ul>
-    </nav>
-    <div class="bg">
-      <div class="container">
-        <div class="select animated fadeInDown delay-4s">
-          <h1 id="head">Mass Mail Dispatcher</h1>
-          <input type="file" id="upload" accept="text/csv" />
-          <!-- for uploading csv file -->
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Mass Mailer</title>
+</head>
+<body>
+<div class="container">
+    <img class="img-head" src="https://raw.githubusercontent.com/emnatkins/cdn-codepen/main/LYJWgdK/LYJWgdK.mail.jpg"
+         alt="subscribe to email">
+    <h1 class="title">Mail Dispatcher</h1>
+    <p class="description">Upload a CSV file to continue</p>
+    <div class="form-box">
+        <div class="input-main">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope"
+                 viewBox="0 0 16 16">
+                <path
+                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+            </svg>
+            <input id="csvFileInput" onchange="processCSV()" type="file" name="email" placeholder="Your Email">
         </div>
-        <div class="mailInfo">
-          <form onsubmit="sendEmail(); reset(); return false;">
-            <h2 id="box-heading">WRITE YOUR MAIL HERE</h2>
-            <p>
-              <input
-                type="email"
-                id="from"
-                placeholder="From(Email ID)"
-                required
-              />
-            </p>
-            <p>
-              <input type="text" id="subject" placeholder="Subject" required />
-            </p>
-            <p>
-              <textarea
-                id="msg"
-                rows="12"
-                cols="12"
-                placeholder="Body"
-                required
-              ></textarea>
-            </p>
-            <p><button type="submit" id="submit">Send</button></p>
-          </form>
-        </div>
-      </div>
-      <hr />
-      <div class="tables">
-        <div class="valTab">
-          <table id="val">
-            <tr>
-              <td>
-                <h2>Valid Emails : <span id="valCount"></span></h2>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="invalTab">
-          <table id="inval">
-            <tr>
-              <td>
-                <h2>Invalid Emails : <span id="invalCount"></span></h2>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
+        <button class="submit" type="submit" onclick="submit()">Submit</button>
     </div>
-</section>
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <h2>Invalid Emails</h2>
+            <a class="close" href="#">&times;</a>
+            <div id="popupContent" class="content">
+                Hi
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function submit(){
+        window.location.href = 'form.html'
+
+    }
+    function processCSV() {
+        const fileInput = document.getElementById("csvFileInput");
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const contents = e.target.result;
+                const emailList = getValidEmails(contents);
+                const validEmails = emailList[0];
+                const invalidEmails = emailList[1];
+                const popup = document.getElementById('popupContent')
+
+                var msg = ''
+                for (let i = 0; i < invalidEmails.length; i++) {
+                    msg += invalidEmails[i] + ' '
+                }
+                popup.innerHTML = msg
 
 
-  <hr>
-  <script src = "https://smtpjs.com/v3/smtp.js"></script>
-  <script src = "mai.js"></script>
+                // Store valid emails in session storage
+                sessionStorage.setItem("validEmails", JSON.stringify(validEmails));
 
-  <script src = "https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-  <script> var wow = new WOW(
-      {
-        boxClass: 'wow',
-        animateClass: 'animated',
-        offset: 0,
-        mobile: tue,
-        live: true,
-        callback: function(box){
-        },
-        scrollContainer: null,
-        resetAnimation: true,
-      }
-    );
-    wow.init();
-  </script>
-  <div class = "footer-basic">
-    <footer>
-      <p class="copyright">Made By <a href="https://www.linkedin.com/in/simran-shah-80045120a/" target="_blank">Anjali Singh</a></p>
-    </footer>
-  </div>
-  </body>
+                console.log(validEmails);
+            };
+
+            reader.readAsText(file);
+
+            window.location.href = '#popup1'
+        }
+    }
+
+    function getValidEmails(csvContent) {
+        const lines = csvContent.split("\n");
+        const validEmails = [];
+        const invalidEmails = [];
+
+        for (let i = 0; i < lines.length; i++) {
+            const email = lines[i].trim();
+
+            if (validateEmail(email)) {
+                validEmails.push(email);
+            } else invalidEmails.push(email)
+        }
+
+        return [validEmails, invalidEmails];
+    }
+
+    function validateEmail(email) {
+
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        return email.match(validRegex);
+
+    }
+</script>
+</body>
 </html>
