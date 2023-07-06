@@ -1,178 +1,190 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Libre Baskerville', serif;
+    font-family: "Open Sans", sans-serif;
 }
 
-body{
-    background-position: center;
-    background-repeat: no-repeat;
+body {
+    background: linear-gradient(45deg, #fb4764, #f88d5f) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    background: linear-gradient(to top left, #d9d6ca, #ca96d6);
 }
 
-ul{
-    list-style-type: none;
-    text-align: left;
-    padding: 30px;
-    background-color: rgba(15, 13, 13, 0.918);
+.submit {
+    background: linear-gradient(45deg, #fb4764, #f88d5f) no-repeat;
+    border: none;
+    outline: none;
+    cursor: pointer;
     color: white;
+    padding: 11px 35px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
 }
 
-
-li{
-    display:inline;
-    padding: 20px;
-    background-color: black;
-    color: white;
+.input-main input {
+    height: 26px;
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: #a2a2a2;
+    font-size: 1rem;
 }
 
-a{
-    text-decoration: none;
-    color: white;
+.input-main input::placeholder {
+    color: #a2a2a2;
 }
 
-.container{
+.input-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #ebebeb;
+    border-radius: 100px;
+    margin-right: 15px;
+}
+
+.input-main svg {
+    width: 30px;
+    height: auto;
+    fill: #a2a2a2;
+    margin-right: 10px;
+}
+
+.form-box {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    margin: 0 20px;
+    margin-top: 39px;
+}
+
+.description {
+    font-size: 1.1rem;
+    color: #636363;
+    margin-top: 10px;
+}
+
+.title {
+    /*text-transform: uppercase;*/
+    font-weight: 900;
+    color: #4a4a4a;
+}
+
+.img-head {
     width: 100%;
-    height: 100vh;
-    flex-wrap:wrap;
+    height: auto;
+    margin-top: 45px;
 }
 
-.select {
-    display: flex;
-    flex-direction: column;
-}
-
-#head {
-    font-size: 50px;
-    text-align: left;
-}
-
-#box-heading {
-    padding: 5px;
-    margin: auto;
+.container {
+    background-color: white;
     text-align: center;
-}
-
-.mailInfo {
-    width: 500px;
-    position: relative;
-    height: 65%;
-    background-color: rgb(204, 211, 214);
-    background: linear-gradient(to top left, #ffffffff, #ffffff33);
-    backdrop-filter: blur(8px);
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px #e4badb;
-    z-index: 2;
-}
-
-
-#from, #subject {
-    margin: 14px;
-    padding: 10px;
-    width: 470px;
-    height: 40px;
-    border-radius: 4px;
-}
-
-#msg {
-    margin: 14px;
-    padding: 10px;
-    width: 40px;
-    width: 470px;
-    border-radius: 4px;
-}
-
-#submit {
-    width: 10em;
-    height: 3em;
-    margin: 0;
-    position: absolute;
-    top: 92%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 30px;
-}
-
-button {
-    background: #cd86db;
-    color: #e6dede;
-    border: 2px ;
-    font-size: 17px;
-    letter-spacing: 2px;
-    padding: 10px 40px;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: inline-block;
-    margin: 15px 30px;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-    box-shadow: 0 1px 1px #130b0b;
-}
-
-button:hover, button:focus {
-    background-color: rgb(207, 62, 200);
-    color: #1b1919;
-}
-
-.select input{
-    background-color: rgb(255, 255, 255);
-    border: none;
-    margin: 0vh auto;
+    width: 769px;
+    height: 486px;
     border-radius: 50px;
-    box-shadow: 5px 5px 10px black;
-    font-weight: 600;
-    font-size: 1rem;
-    outline: none;
-    width: 350px;
+    margin: 50px auto;
 }
 
-.select input::file-selector-button {
-    background: #cd86db;
-    color: white;
+@media only screen and (max-width: 500px) {
+    body {
+        margin: 0 15px;
+    }
+
+    .img-head {
+        margin-top: 75px;
+    }
+
+    .form-box {
+        display: grid;
+    }
+
+    .input-main {
+        margin-right: 0;
+    }
+
+    .submit {
+        margin-top: 16px;
+    }
+
+    .description {
+        font-size: 1rem;
+        margin: 0 35px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .form-box {
+        margin-top: 25px;
+    }
+
+    .container {
+        border-radius: 15px;
+        width: 100%;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 70px auto;
     padding: 20px;
-    border: none;
-    border-radius: 50px;
-    box-shadow: 0 1px 1px #6b4559;
-    outline: none;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
 }
 
-.select input::file-selector-button:hover{
-    background-color: rgb(207, 62, 200);
-    cursor: pointer;
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: #06D85F;
+}
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
 }
 
-.tables {
-    width: 1000px;
-    margin: 0 auto;
-}
-
-table {
-    text-align: left;
-    float: left;
-    width: 500px;
-}
-
-hr {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.footer-basic.copyright {
-    margin-top: 15px;
-    width: 100%;
-    height: 30px;
-    text-align: center;
-    font-size: 10px;
-    background-color: rgba(15, 13, 13, 0.918);
-    color: #aaa;
-    margin-bottom: 0;
+@media screen and (max-width: 700px){
+    .popup{
+        width: 70%;
+    }
 }
